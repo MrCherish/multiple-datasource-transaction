@@ -58,7 +58,10 @@ public class RtDataSourceConfiguration {
     public JtaTransactionManager regTransactionManager () {
         UserTransactionManager userTransactionManager = new UserTransactionManager();
         UserTransaction userTransaction = new UserTransactionImp();
-        return new JtaTransactionManager(userTransaction, userTransactionManager);
+
+        JtaTransactionManager jtaTransactionManager = new JtaTransactionManager(userTransaction, userTransactionManager);
+        jtaTransactionManager.setAllowCustomIsolationLevels(true);
+        return jtaTransactionManager;
 
     }
 
