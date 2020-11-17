@@ -27,9 +27,12 @@ public class ArrayListUtils {
         // 遍历
         System.out.println(list.toString());
 
-        // 倒置反转
+        // 头插法反转双向列表
         System.out.println(list.reverseByHead().toString());
 
+        // 头插法反转单项列表
+        NodeList nl = list.reverseSingleByHead();
+        System.out.println(nl.toString());
 
     }
 }

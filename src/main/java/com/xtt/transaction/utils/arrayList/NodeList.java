@@ -19,7 +19,7 @@ public class NodeList {
     public Node tail;
 
     /**
-     * 头插法 列表反转
+     * 头插法 双链表列表反转
      *
      * @return
      */
@@ -62,6 +62,43 @@ public class NodeList {
         this.head = newHead;
         this.tail = newTail;
 
+        return this;
+    }
+
+    /**
+     * 头插法 单链表列表反转
+     *
+     * @return
+     */
+    public NodeList reverseSingleByHead() {
+
+        // 反转之后的节点
+        Node p0 = null;
+
+        // 当前指针指向的节点
+        Node p1 = head;
+
+        // 当前指针指向的下一个节点
+        Node p2 = head.getNext();
+
+        while (p1 != null ) {
+
+            // 将当前节点的下一个节点指向 反转之后的节点
+            p1.setNext(p0);
+
+            // 将反转之后的节点 指向 当前节点
+            p0 = p1;
+
+            // 当前指针后移
+            p1 = p2;
+
+            // 下一个节点也跟着后移
+            if (p2 != null) {
+                p2 = p2.getNext();
+            }
+        }
+
+        this.head = p0;
         return this;
     }
 
