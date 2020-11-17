@@ -30,9 +30,13 @@ public class ArrayListUtils {
         // 头插法反转双向列表
         System.out.println(list.reverseByHead().toString());
 
-        // 头插法反转单项列表
-        NodeList nl = list.reverseSingleByHead();
+        // 尾插法反转单项列表
+        NodeList nl = list.reverseSingleByTail();
         System.out.println(nl.toString());
+
+        // 头插法反转单项列表
+        NodeList n = list.reverseSingleByHead();
+        System.out.println(n.toString());
 
     }
 }

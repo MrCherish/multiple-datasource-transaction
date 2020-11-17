@@ -68,9 +68,42 @@ public class NodeList {
     /**
      * 头插法 单链表列表反转
      *
-     * @return
      */
     public NodeList reverseSingleByHead() {
+
+        // 当前切下来的节点
+        Node now = null;
+
+        // 新的头指针
+        Node newHead = null;
+
+        // 8->10->12
+        while (head != null) {
+
+            // 当前切下来的节点
+            now = head;
+
+            // 头指针后移
+            head = head.getNext();
+
+            // 将当前头指针 的下一个节点
+            now.setNext(newHead);
+
+            // 新的头指针指向当前切下来的节点
+            newHead = now;
+
+        }
+
+        this.head = newHead;
+        return this;
+    }
+
+    /**
+     * 尾插法 单链表列表反转
+     *
+     * @return
+     */
+    public NodeList reverseSingleByTail() {
 
         // 反转之后的节点
         Node p0 = null;
