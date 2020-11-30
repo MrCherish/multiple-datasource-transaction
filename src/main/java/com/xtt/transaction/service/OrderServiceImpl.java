@@ -26,11 +26,15 @@ public class OrderServiceImpl implements OrderService {
                 while (true) {
                     lock.lock();
                     try {
-                        while (printUpper.get()) {
+                        while (!printUpper.get()) {
+
+                            // 当前线程加入 localCondition 等待对列，同时释放锁
                             localCondition.await();
                         }
-                        System.out.println("thread-A:" + LOCALARR[getUpperIndex()]);
-                        printUpper.compareAndSet(false, true);
+                        System.out.println("thread-A:" + UPPERARR[getUpperIndex()]);
+                        printUpper.compareAndSet(true, false);
+
+                        // 通知 upperCondition 队列线程获取锁
                         upperCondition.signal();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -47,11 +51,14 @@ public class OrderServiceImpl implements OrderService {
                 while (true) {
                     lock.lock();
                     try {
-                        while (!printUpper.get()) {
+                        while (printUpper.get()) {
+                            // 当前线程加入 upperCondition 等待对列，同时释放锁
                             upperCondition.await();
                         }
-                        System.out.println("thread-B:" + UPPERARR[getLocalIndex()]);
-                        printUpper.compareAndSet(true, false);
+                        System.out.println("thread-B:" + LOCALARR[getLocalIndex()]);
+                        printUpper.compareAndSet(false, true);
+
+                        // 通知 localCondition 队列线程获取锁
                         localCondition.signal();
                     } catch (Exception e) {
                         e.printStackTrace();
